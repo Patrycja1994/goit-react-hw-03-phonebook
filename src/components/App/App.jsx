@@ -31,34 +31,35 @@ export class App extends Component {
           number: number,
         };
       return {
-          contacts: [...contacts, addNewContact]
+          contacts: [...contacts, addNewContact],
       };
       }
     });
   };
 
     changeFilter = (event) => {
-      this.setState({ filter: event.currentTarget.value })
-    };
+      this.setState({ filter: event.currentTarget.value });
+     };
 
     deleteValue = (id) => {
-      this.setState(prevState => ({
-        contacts: prevState.contacts.filter(contact => contact.id !== id)
-      }))
-    } 
+      this.setState((prevState) => ({
+       contacts: prevState.contacts.filter((contact) => contact.id !== id),
+      }));
+  };
 
     filtredContacts = () => {
       const { filter, contacts } = this.state;
       return contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()));
   };
   
-  componentDidMount() {
-    const contactsFromStorage = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(contactsFromStorage);
-    if (parsedContacts) {
-      this.setState({contactsFromStorage: parsedContacts});
+    componentDidMount() {
+      const contactsFromStorage = localStorage.getItem("contacts");
+      const parsedContacts = JSON.parse(contactsFromStorage);
+
+      if (parsedContacts) {
+        this.setState({contactsFromStorage: parsedContacts});
     }
-    }
+  }
 
     componentDidUpdate(prevState) {
       if (this.state.contacts !== prevState.contacts ) {
